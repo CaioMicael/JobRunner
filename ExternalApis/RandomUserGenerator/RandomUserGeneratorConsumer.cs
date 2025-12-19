@@ -7,7 +7,7 @@ namespace JobRunner.ExternalApis.RandomUserGenerator
     {
         public string URL_API { get; } = "https://randomuser.me/api/";
 
-        public RandomUserResponseDTO DoConsume()
+        public RandomUserResponseDTO DoConsume() 
         {
 
         }
