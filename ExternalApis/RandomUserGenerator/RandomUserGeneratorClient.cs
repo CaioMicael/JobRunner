@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -9,25 +10,43 @@ namespace JobRunner.ExternalApis.RandomUserGenerator
 {
     public class RandomUserGeneratorClient : IExternalApiClient<RandomUserResponseDTO>
     {
+        public ILogger<RandomUserGeneratorClient> _logger { get; set; }
         public const string URL_API = "https://randomuser.me/api/";
+
+        public RandomUserGeneratorClient(ILogger<RandomUserGeneratorClient> logger)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); 
+        }
 
         public async Task<RandomUserResponseDTO> DoConsume() 
         {
             HttpClient client = new HttpClient();
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-            var response = await client.GetAsync(URL_API,cts.Token);
 
-            if (response.IsSuccessStatusCode)
+            using (_logger.BeginScope("Iniciando requisição para RandomUserGenerator"))
             {
-                var result = await response.Content.ReadFromJsonAsync<RandomUserResponseDTO>(cancellationToken: cts.Token);
+                var stopWatch = Stopwatch.StartNew();
 
-                if (result == null)
-                    throw new Exception("Não houve retorno da API");
+                var response = await client.GetAsync(URL_API, cts.Token);
 
-                return result;
+                stopWatch.Stop();
+                _logger.LogInformation(
+                    "Tempo de resposta {ElapsedMs} ms",
+                    stopWatch.ElapsedMilliseconds
+                );
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadFromJsonAsync<RandomUserResponseDTO>(cancellationToken: cts.Token);
+
+                    if (result == null)
+                        throw new Exception("Não houve retorno da API");
+
+                    return result;
+                }
+
+                throw new Exception($"Status Code: {response.StatusCode}");
             }
-
-            throw new Exception($"Status Code: {response.StatusCode}");
         }
     }
 }
