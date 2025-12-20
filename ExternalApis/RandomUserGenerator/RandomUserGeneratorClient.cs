@@ -1,8 +1,5 @@
 ﻿using System.Diagnostics;
-using System.Linq.Expressions;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+using JobRunner.Domain.DTO;
 using JobRunner.ExternalApis.RandomUserGenerator.DTO;
 using JobRunner.Interfaces;
 
@@ -18,35 +15,33 @@ namespace JobRunner.ExternalApis.RandomUserGenerator
             _logger = logger ?? throw new ArgumentNullException(nameof(logger)); 
         }
 
-        public async Task<RandomUserResponseDTO> DoConsume() 
+        public async Task<ExternalApiResponseDTO<RandomUserResponseDTO>> DoConsume() 
         {
             HttpClient client = new HttpClient();
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 
-            using (_logger.BeginScope("Iniciando requisição para RandomUserGenerator"))
+            var response = await client.GetAsync(URL_API, cts.Token);
+
+            if (response.IsSuccessStatusCode)
             {
-                var stopWatch = Stopwatch.StartNew();
-
-                var response = await client.GetAsync(URL_API, cts.Token);
-
-                stopWatch.Stop();
-                _logger.LogInformation(
-                    "Tempo de resposta {ElapsedMs} ms",
-                    stopWatch.ElapsedMilliseconds
-                );
-
-                if (response.IsSuccessStatusCode)
+                var result = await response.Content.ReadFromJsonAsync<RandomUserResponseDTO>(cancellationToken: cts.Token);
+                return new ExternalApiResponseDTO<RandomUserResponseDTO>
                 {
-                    var result = await response.Content.ReadFromJsonAsync<RandomUserResponseDTO>(cancellationToken: cts.Token);
-
-                    if (result == null)
-                        throw new Exception("Não houve retorno da API");
-
-                    return result;
-                }
-
-                throw new Exception($"Status Code: {response.StatusCode}");
+                    ResponseDTO = result,
+                    StatusCode = response.StatusCode
+                };
             }
+
+            return new ExternalApiResponseDTO<RandomUserResponseDTO>
+            {
+                ResponseDTO = null,
+                StatusCode = response.StatusCode
+            };
+        }
+
+        public string GetApiDescription()
+        {
+            return "Random User Generator";
         }
     }
 }

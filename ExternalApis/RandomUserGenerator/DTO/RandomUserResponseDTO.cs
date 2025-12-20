@@ -41,7 +41,7 @@
             public string City { get; set; }
             public string State { get; set; }
             public string Country { get; set; }
-            public int Postcode { get; set; }
+            public long Postcode { get; set; }
         }
 
         public class RandomUserBirthday 
