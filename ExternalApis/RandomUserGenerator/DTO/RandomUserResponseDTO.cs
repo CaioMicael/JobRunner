@@ -13,18 +13,20 @@
         public class RandomUserInfo 
         { 
             public string Seed { get; set; }
-            public string Results { get; set; }
-            public string Page { get; set; }
+            public int Results { get; set; }
+            public int Page { get; set; }
             public string Version { get; set; }
         }
 
         public class RandomUserResults 
         {
             public string Gender { get; set; }
+            public RandomUserName Name { get; set; }
+            public RandomUserLocation Location { get; set; }
             public string Email { get; set; }
             public string Nat { get; set; }
             public string Phone { get; set; }
-            public RandomUserName Name { get; set; }
+            public RandomUserBirthday Dob { get; set; }
         }
 
         public class RandomUserName 
@@ -39,7 +41,7 @@
             public string City { get; set; }
             public string State { get; set; }
             public string Country { get; set; }
-            public string Postcode { get; set; }
+            public int Postcode { get; set; }
         }
 
         public class RandomUserBirthday 
