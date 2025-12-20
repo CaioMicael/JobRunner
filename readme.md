@@ -1,6 +1,6 @@
-﻿# 🕒 Job Runner – External API Scheduler
+﻿# Job Runner – External API Scheduler
 
-## 📌 Visão Geral
+## Visão Geral
 
 Este projeto implementa um **Job Scheduler genérico** capaz de executar tarefas recorrentes que **consomem APIs externas**, processam os dados retornados e realizam persistência de forma **performática, desacoplada e escalável**.
 
@@ -10,7 +10,7 @@ O projeto foi pensado como um **laboratório prático de arquitetura backend**, 
 
 ---
 
-## 🎯 Objetivos do Projeto
+## Objetivos do Projeto
 
 - Criar um **scheduler de jobs recorrentes**
 - Executar jobs em intervalos configuráveis (ex: a cada 30 segundos)
@@ -24,7 +24,7 @@ O projeto foi pensado como um **laboratório prático de arquitetura backend**, 
 
 ---
 
-## 🧠 Motivação
+## Motivação
 
 Em sistemas reais, é comum a necessidade de:
 
@@ -38,7 +38,7 @@ Este projeto simula esse cenário, focando mais na **qualidade da arquitetura e 
 
 ---
 
-## 🧱 Arquitetura Geral
+## Arquitetura Geral
 
 A arquitetura é baseada em **orquestração centralizada em um Job Service**, com responsabilidades bem definidas e desacopladas.
 
@@ -57,9 +57,9 @@ O **Job Service** atua como um maestro, coordenando todas as etapas do fluxo sem
 
 ---
 
-## 🧩 Componentes da Arquitetura
+## Componentes da Arquitetura
 
-### 🔹 Job Scheduler
+### Job Scheduler
 
 Responsável por:
 - Definir a periodicidade de execução dos jobs
@@ -68,7 +68,7 @@ Responsável por:
 
 ---
 
-### 🔹 Job Service (Orquestrador)
+### Job Service (Orquestrador)
 
 Responsável por:
 - Orquestrar o fluxo completo do job
@@ -80,7 +80,7 @@ Responsável por:
 
 ---
 
-### 🔹 External API Consumer
+### External API Consumer
 
 Responsável apenas por:
 - Consumir APIs externas via HTTP
@@ -96,7 +96,7 @@ Cada API externa implementa um contrato genérico, permitindo que o Job Runner c
 
 ---
 
-### 🔹 Data Validator
+### Data Validator
 
 Responsável por:
 - Validar dados retornados pelas APIs
@@ -106,7 +106,7 @@ Responsável por:
 
 ---
 
-### 🔹 Persistence Layer
+### Persistence Layer
 
 Responsável por:
 - Persistir dados processados no banco
@@ -116,7 +116,7 @@ Responsável por:
 
 ---
 
-### 🔹 Logging & Metrics
+### Logging & Metrics
 
 Responsável por:
 - Registrar logs em arquivos TXT
@@ -127,7 +127,7 @@ Responsável por:
 
 ---
 
-## ⚙️ Desafios Técnicos Trabalhados
+## Desafios Técnicos Trabalhados
 
 - Concorrência e execução paralela de jobs
 - Performance no consumo de APIs
