@@ -1,4 +1,4 @@
-using JobRunner.ExternalApis.RandomUserGenerator;
+using JobRunner.ExternalApis.RandomUserGenerator.Application;
 using JobRunner.Services;
 using Microsoft.Extensions.Logging;
 using Serilog;

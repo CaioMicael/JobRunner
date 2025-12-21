@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\Entities\" />
+    <Folder Include="ExternalApis\RandomUserGenerator\Domain\Entities\" />
     <Folder Include="Infrastructure\Logging\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

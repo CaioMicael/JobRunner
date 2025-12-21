@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using JobRunner.Domain.DTO;
-using JobRunner.ExternalApis.RandomUserGenerator;
-using JobRunner.ExternalApis.RandomUserGenerator.DTO;
+using JobRunner.ExternalApis.RandomUserGenerator.Application;
+using JobRunner.ExternalApis.RandomUserGenerator.Domain.DTO;
 
 namespace JobRunner.Services
 {

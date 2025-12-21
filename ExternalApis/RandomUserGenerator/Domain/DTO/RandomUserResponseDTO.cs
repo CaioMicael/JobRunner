@@ -1,4 +1,4 @@
-﻿namespace JobRunner.ExternalApis.RandomUserGenerator.DTO
+﻿namespace JobRunner.ExternalApis.RandomUserGenerator.Domain.DTO
 {
     /// <summary>
     /// DTO principal da responsta da API random user generator

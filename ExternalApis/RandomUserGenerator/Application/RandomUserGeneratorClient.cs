@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using JobRunner.Domain.DTO;
-using JobRunner.ExternalApis.RandomUserGenerator.DTO;
+using JobRunner.ExternalApis.RandomUserGenerator.Domain.DTO;
 using JobRunner.Interfaces;
 
-namespace JobRunner.ExternalApis.RandomUserGenerator
+namespace JobRunner.ExternalApis.RandomUserGenerator.Application
 {
     public class RandomUserGeneratorClient : IExternalApiClient<RandomUserResponseDTO>
     {
