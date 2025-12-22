@@ -1,5 +1,7 @@
+using System;
 using JobRunner.ExternalApis.RandomUserGenerator.Application;
 using JobRunner.Services;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
@@ -18,6 +20,8 @@ Log.Logger = new LoggerConfiguration()
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var conexao = builder.Configuration.GetConnectionString("Postgres");
+builder.Services.AddDbContext<AppDbContext>(b => b.UseNpgsql(conexao));
 
 // Substitui o pipeline de logging
 builder.Host.UseSerilog();
