@@ -123,6 +123,7 @@ Responsável por:
 - Medir tempo de execução de cada etapa
 - Auxiliar na análise de performance
 - Facilitar troubleshooting
+- Usado durante todo o processo
 
 
 ---
