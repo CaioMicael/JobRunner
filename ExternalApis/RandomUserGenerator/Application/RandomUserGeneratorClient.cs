@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using JobRunner.Domain.DTO;
+﻿using JobRunner.Domain.DTO;
 using JobRunner.ExternalApis.RandomUserGenerator.Domain.DTO;
 using JobRunner.Interfaces;
 
